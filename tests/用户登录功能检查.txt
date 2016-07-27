@@ -1,0 +1,36 @@
+*** Settings ***
+Resource          ../resources/global_keywords.txt
+
+*** Test Cases ***
+N-01_财务中心用户登录
+    [Setup]    Setup Commands
+    Input Text    username    ${SC_USER}
+    Input Password    password    ${SC_PWD}
+    Click Button    name=submit
+    Page Should Contain Link    财务中心
+    Page Should Contain Link    客服中心
+    Page Should Contain Link    分销运营中心
+    Page Should Contain Link    订单中心
+    Page Should Contain Link    酒店中心
+    [Teardown]    User Keyword Logout
+
+N-02_客服中心用户登录
+    [Setup]    Setup Commands
+    Input Text    username    ${CS_USER}
+    Input Password    password    ${CS_PWD}
+    Click Button    name=submit
+    Page Should Contain Link    客服中心
+    Page Should Contain Link    订单中心
+    Page Should Contain Link    酒店中心
+    [Teardown]    User Keyword Logout
+
+N-03_分销运营中心用户登录
+    [Setup]    Setup Commands
+    Input Text    username    ${GDS_USER}
+    Input Password    password    ${GDS_PWD}
+    Click Button    name=submit
+    Page Should Contain Link    分销运营中心
+    Page Should Contain Link    订单中心
+    Page Should Contain Link    酒店中心
+    Page Should Contain Link    销售中心
+    [Teardown]    User Keyword Logout

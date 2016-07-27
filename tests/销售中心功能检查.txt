@@ -1,0 +1,79 @@
+*** Settings ***
+Resource          ../resources/global_keywords.txt
+
+*** Test Cases ***
+N-01_拜访记录查询列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    销售中心
+    Unselect Frame
+    Select Frame    jerichotabiframe_1
+    Table Should Contain    contentTable    拜访类型
+    Table Should Contain    contentTable    上门拜访
+    [Teardown]    User Keyword Logout
+
+N-02_分销拜访记录查询列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    销售中心
+    Click Element    //a[contains(@href,'/a/crm/visit/rfCrmVisitRecord/list?queryVisitType=switch')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_1
+    Table Should Contain    contentTable    拜访类型
+    Table Should Contain    contentTable    上门拜访
+    [Teardown]    User Keyword Logout
+
+N-03_供应链拜访记录列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    销售中心
+    Click Element    //a[contains(@href,'/a/crm/visit/rfCrmVisitRecord/list?queryVisitType=marketing')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_2
+    Table Should Contain    contentTable    拜访方式
+    Table Should Contain    contentTable    上门拜访
+    [Teardown]    User Keyword Logout
+
+N-04_销售区域设置列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    销售中心
+    Click Element    //*[@id="left"]/div[2]/div[2]/div[1]
+    Click Element    //a[contains(@href,'/a/crm/user/rfCrmUserArea/list')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_2
+    Table Should Contain    contentTable    省编码
+    [Teardown]    User Keyword Logout
+
+N-05_销售用户设置列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    销售中心
+    Click Element    //*[@id="left"]/div[2]/div[2]/div[1]
+    Click Element    //a[contains(@href,'/a/crm/user/syOrgUser/list')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_2
+    Table Should Contain    contentTable    用户系统登录名
+    [Teardown]    User Keyword Logout
+
+N-06_任务发布列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    销售中心
+    Click Element    //*[@id="left"]/div[2]/div[3]/div[1]
+    Click Element    //a[contains(@href,'/a/crm/task/rfCrmUserTask/list')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_2
+    Table Should Contain    contentTable    任务名称
+    [Teardown]    User Keyword Logout
+
+N-07_OMS端登录统计列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    销售中心
+    Click Element    //*[@id="left"]/div[2]/div[4]/div[1]
+    Click Element    //a[contains(@href,'/a/crm/user/rfCrmUserDevic/omsLoginList')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_2
+    Table Should Contain    contentTable    最早登录时间
+    [Teardown]    User Keyword Logout

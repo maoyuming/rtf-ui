@@ -1,0 +1,108 @@
+*** Settings ***
+Resource          ../resources/global_keywords.txt
+
+*** Test Cases ***
+N-01_账单流水明细列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    财务中心
+    Unselect Frame
+    Select Frame    jerichotabiframe_1
+    Table Should Contain    contentTable    微信/支付宝交易号
+    Table Should Contain    contentTable    采购
+    [Teardown]    User Keyword Logout
+
+N-02_账户余额列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    财务中心
+    Click Element    //a[contains(@href,'/a/accntledger/settlementAccntLedger')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_2
+    Table Should Contain    contentTable    后付费额度
+    Table Should Contain    contentTable    酒店老板
+    [Teardown]    User Keyword Logout
+
+N-03_支付记录列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    财务中心
+    Click Element    //a[contains(@href,'/a/settlementpay/settlementPay/list')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_2
+    Table Should Contain    contentTable    业务类型
+    Table Should Contain    contentTable    充值
+    [Teardown]    User Keyword Logout
+
+N-04_旅行社周期账单列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    财务中心
+    Click Element    //*[@id="left"]/div[2]/div[2]/div[1]
+    sleep    10
+    Click Element    //a[contains(@href,'/a/accntbill/settlementAccntBill/list')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_2
+    Table Should Contain    contentTable    操作
+    Table Should Contain    contentTable    重新结算
+    [Teardown]    User Keyword Logout
+
+N-05_去哪儿网周期账单列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    财务中心
+    Click Element    //*[@id="left"]/div[2]/div[2]/div[1]
+    Click Element    //a[contains(@href,'/a/accntbill/settlementAccntBill/qunarlist')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_2
+    Table Should Contain    contentTable    客户名称
+    Table Should Contain    contentTable    去哪儿
+    [Teardown]    User Keyword Logout
+
+N-06_洗涤月账单列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    财务中心
+    Click Element    //*[@id="left"]/div[2]/div[2]/div[1]
+    Click Element    //a[contains(@href,'/a/accntbill/settlementAccntBill/washlist')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_2
+    Table Should Contain    contentTable    操作
+    Table Should Contain    contentTable    充值卡抵扣金额
+    [Teardown]    User Keyword Logout
+
+N-07_酒店周对账单列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    财务中心
+    Click Element    //*[@id="left"]/div[2]/div[2]/div[1]
+    Click Element    //a[contains(@href,'/a/accntbill/settlementAccntBill/hotellist')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_2
+    Table Should Contain    table1    操作
+    Table Should Contain    table1    明细
+    [Teardown]    User Keyword Logout
+
+N-08_账户提现列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    财务中心
+    Click Element    //*[@id="left"]/div[2]/div[2]/div[1]
+    Click Element    //a[contains(@href,'/a/accntwithdraw/settlementAccountWithdrawcash')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_2
+    Table Should Contain    contentTable    提现状态
+    Table Should Contain    contentTable    审核通过
+    [Teardown]    User Keyword Logout
+
+N-09_任务调度列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    财务中心
+    Click Element    //*[@id="left"]/div[2]/div[3]/div[1]
+    Click Element    //a[contains(@href,'/a/schedulercenter/settlementSchedulerCenter')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_2
+    Table Should Contain    contentTable    操作
+    Table Should Contain    contentTable    360000
+    [Teardown]    User Keyword Logout

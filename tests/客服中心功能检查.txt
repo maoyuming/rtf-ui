@@ -1,0 +1,21 @@
+*** Settings ***
+Resource          ../resources/global_keywords.txt
+
+*** Test Cases ***
+N-01_分销订单确认列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${CS_USER}    ${CS_PWD}
+    Unselect Frame
+    Select Frame    jerichotabiframe_0
+    Table Should Contain    contentTable    订单详情
+    [Teardown]    User Keyword Logout
+
+N-02_短信验证码列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${CS_USER}    ${CS_PWD}
+    Click Element    //*[@id="left"]/div[1]/div[2]/div[1]
+    Click Element    //a[contains(@href,'/a/message/lMessageLog/list')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_1
+    Table Should Contain    contentTable    您的验证码是
+    [Teardown]    User Keyword Logout

@@ -1,0 +1,23 @@
+*** Settings ***
+Resource          ../resources/global_keywords.txt
+
+*** Test Cases ***
+N-01_分销订单列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${CS_USER}    ${CS_PWD}
+    Click Link    订单中心
+    Click Element    xpath=//a[contains(@href,'/a/datacenter/orders/list')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_1
+    Table Should Contain    contentTable    订单详情
+    [Teardown]    User Keyword Logout
+
+N-02_采购订单列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${CS_USER}    ${CS_PWD}
+    Click Link    订单中心
+    Click Element    xpath=//a[contains(@href,'/a/oms/omsOrder/list')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_2
+    Table Should Contain    contentTable    E2016
+    [Teardown]    User Keyword Logout

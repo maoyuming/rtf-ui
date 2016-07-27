@@ -1,0 +1,24 @@
+*** Settings ***
+Resource          ../resources/global_keywords.txt
+
+*** Test Cases ***
+N-01_酒店查询列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    酒店中心
+    Unselect Frame
+    Select Frame    jerichotabiframe_1
+    Table Should Contain    contentTable    审核状态
+    Table Should Contain    contentTable    审核通过
+    [Teardown]    User Keyword Logout
+
+N-02_修改老板电话列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    酒店中心
+    Click Element    //a[contains(@href,'/a/crm/hotel/eHotel/list')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_2
+    Table Should Contain    contentTable    老板手机号
+    Table Should Contain    contentTable    修改手机号
+    [Teardown]    User Keyword Logout

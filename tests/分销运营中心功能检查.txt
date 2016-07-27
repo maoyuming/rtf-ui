@@ -1,0 +1,62 @@
+*** Settings ***
+Resource          ../resources/global_keywords.txt
+
+*** Test Cases ***
+N-01_分销商管理列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    分销运营中心
+    Unselect Frame
+    Select Frame    jerichotabiframe_1
+    Table Should Contain    datatable    编辑
+    Table Should Contain    datatable    删除
+    Table Should Contain    datatable    酒店关联
+    Table Should Contain    datatable    充值
+    [Teardown]    User Keyword Logout
+
+N-02_分销订单列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    分销运营中心
+    Click Element    //*[@id="left"]/div[2]/div[2]/div[1]
+    Click Element    //a[contains(@href,'/a/datacenter/orders/list')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_2
+    Table Should Contain    contentTable    订单详情
+    [Teardown]    User Keyword Logout
+
+N-03_酒店分销渠道开关列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    分销运营中心
+    Click Element    //*[@id="left"]/div[2]/div[3]/div[1]
+    Click Element    //a[contains(@href,'/a/hotelchannel/hotelChannelSetting')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_2
+    ${VALUE}=    Get Value    changeStatus
+    Should Be Equal As Strings    ${VALUE}    关闭
+    [Teardown]    User Keyword Logout
+
+N-04_分销酒店查询列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    分销运营中心
+    Click Element    //*[@id="left"]/div[2]/div[3]/div[1]
+    Click Element    //a[contains(@href,'/a/hotel/hotel')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_2
+    Table Should Contain    contentTable    分销
+    ${TEXT}=    Get Text    //a[contains(@href,'/a/hotel/hotel/openDistribution')]
+    Should Contain    ${TEXT}    分销
+    [Teardown]    User Keyword Logout
+
+N-05_合同管理列表检查
+    [Setup]    Setup Commands
+    User Keyword Office Login    ${ADMIN_USER}    ${ADMIN_PWD}
+    Click Link    分销运营中心
+    Click Element    //*[@id="left"]/div[2]/div[4]/div[1]
+    Click Element    //a[contains(@href,'/a/contract/hotelContract')]
+    Unselect Frame
+    Select Frame    jerichotabiframe_2
+    Table Should Contain    contentTable    合同类型
+    [Teardown]    User Keyword Logout
