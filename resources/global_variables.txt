@@ -1,10 +1,2 @@
 *** Variables ***
-${OFFICE_URL}     http://office.fangbaba.com    # office地址
-${SC_USER}        scadmin    # 财务中心用户名
-${SC_PWD}         admin    # 财务中心密码
-${CS_USER}        csadmin    # 客服中心用户名
-${CS_PWD}         csadmin    # 客服中心密码
-${GDS_USER}       gdsadmin    # 分销用户名
-${GDS_PWD}        gdsadmin    # 分销密码
-${ADMIN_USER}     officeadmin
-${ADMIN_PWD}      admin
+
